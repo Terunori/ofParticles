@@ -69,16 +69,18 @@ void ofApp::update(){
         
         // boundary
         if(loc_x[i] < 0){
+            // periodic boundary-condition
+            // loc_x[i] = ofGetWidth();
             loc_x[i] = 0;
             speed_x[i] *= -0.9;
         } else if (loc_x[i] > ofGetWidth()){
+            // periodic boundary-condition
+            // loc_x[i] = 0;
             loc_x[i] = ofGetWidth();
             speed_x[i] *= -0.9;
         }
-        if(loc_y[i] < 0){
-            loc_y[i] = 0;
-            speed_y[i] *= -1;
-        } else if (loc_y[i] > ofGetHeight()){
+        
+        if (loc_y[i] > ofGetHeight()){
             loc_y[i] = ofGetHeight();
             speed_y[i] *= -0.8;
         }
@@ -107,7 +109,11 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key) {
+        case 'f':
+            ofToggleFullscreen();
+            break;
+    }
 }
 
 //--------------------------------------------------------------
@@ -129,7 +135,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     mouse_pressed = true;
     pmouseX = x;
-    pmouseY = y;;
+    pmouseY = y;
 }
 
 //--------------------------------------------------------------
